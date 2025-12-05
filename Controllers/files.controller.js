@@ -1,7 +1,10 @@
 import { SendEmail } from "../Services/NodemailerService.js";
 
 const UploadFiles = async (req, res) => {
-  const files = req.files;  
+  const files = req.files; 
+  
+  console.log(files);
+  
 
   if (!files) {
     return res
