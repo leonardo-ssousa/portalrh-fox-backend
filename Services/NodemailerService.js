@@ -2,11 +2,16 @@ import nodemailer from 'nodemailer';
 
 // Configura o transporte SMTP
 const transporter = nodemailer.createTransport({
-  service: "outlook",
+  host: "smtp.office365.com", // Servidor SMTP do Outlook
+  port: 587, // Porta padrão para STARTTLS
+  secure: false, // Use STARTTLS, não SSL/TLS explícito
   auth: {
     user: "leonardo.silva@foxaudit.com.br",
     pass: "lesi*4563",
   },
+  tls: {
+    ciphers: 'SSLv3' // Pode ser necessário dependendo do ambiente
+  }
 });
 
 /**
@@ -36,7 +41,7 @@ export function SendEmail(to, subject, content, attachments) {
     // Envia o e-mail
     transporter.sendMail(mailOptions, (error, info) => {
       if (error) {
-        return reject(console.log("Erro ao enviar e-mail:", error));
+        return reject(error);
       }
       return resolve(console.log("E-mail enviado:", info.response));
     });
