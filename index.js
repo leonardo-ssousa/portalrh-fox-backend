@@ -1,11 +1,12 @@
 import { configDotenv } from "dotenv";
+configDotenv({ quiet: true});
+
 import express from "express";
 import cors from "cors"
 
 const app = express();
 app.use(cors({ origin: "*" }))
 app.use(express.json());
-configDotenv({ quiet: true});
 
 
 import filesRoutes from "./Routes/files.routes.js"
